@@ -1,0 +1,17 @@
+{
+    "name": "txphp_orm/txphporm",
+    "description": "Simple ORM made in php inspired by sequelize, a nodeJS orm",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "TxphpOrm\\TxphpOrm\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MatheusMendoncaLima",
+            "email": "matheusmendima03@gmail.com"
+        }
+    ],
+    "require": {}
+}
