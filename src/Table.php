@@ -36,7 +36,7 @@ abstract class Table
      */
     public static function addEntry(array $args)
     {
-        return static::arrayToObject(static::$internalTableConn->execute_query("INSERT INTO `" . static::$internalTableName . "` " . str_replace("\"", "`", ArrayToString::from(static::$internalColumnsTable)) . " VALUES " . ArrayToString::from($args))->fetch_assoc());
+        return static::arrayToObject(static::$internalTableConn->execute_query("INSERT INTO `" . static::$internalTableName . "` " . str_replace("\"", "`", ArrayToString::from(array_keys(static::$internalColumnsTable))) . " VALUES " . ArrayToString::from($args))->fetch_assoc());
     }
 
     public static function removeWhere($idColumn, $id)
