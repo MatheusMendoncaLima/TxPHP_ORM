@@ -72,9 +72,9 @@ abstract class Table
         return $objects;
     }
 
-     public static function count(): int
+     public static function count(Where $where = new Where()): int
     {   
-        return static::$internalTableConn->execute_query("SELECT * from `" . static::$internalTableName . "` ;\n")->num_rows;
+        return static::$internalTableConn->execute_query("SELECT * from `" . static::$internalTableName . "` ".$where->getStatement().";\n")->num_rows;
     }
 
     
