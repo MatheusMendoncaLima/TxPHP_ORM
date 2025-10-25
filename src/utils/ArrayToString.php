@@ -1,5 +1,5 @@
 <?php 
-namespace TxPhpOrm\utils;
+namespace TxPHP\orm\utils;
 
 use DateTime;
 

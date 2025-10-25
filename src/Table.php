@@ -1,13 +1,12 @@
 <?php
-namespace TxPhpOrm;
-
+namespace TxPHP\orm;
 use BadMethodCallException;
 use DateTime;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
+use TxPHP\orm\utils\ArrayToString;
 
-use TxPhpOrm\utils\ArrayToString;
 
 abstract class Table
 {

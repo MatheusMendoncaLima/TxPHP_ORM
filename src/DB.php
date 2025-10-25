@@ -1,6 +1,5 @@
 <?php 
-namespace TxPhpOrm;
-
+namespace TxPHP\orm;
 use mysqli;
 
 

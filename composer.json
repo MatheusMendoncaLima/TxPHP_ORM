@@ -1,10 +1,10 @@
 {
-    "name": "txphp_orm/txphporm",
+    "name": "txphp/orm",
     "description": "Simple ORM made in php inspired by sequelize, a nodeJS orm",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "TxphpOrm\\TxphpOrm\\": "src/"
+            "TxPHP\\orm\\": "src/"
         }
     },
     "authors": [

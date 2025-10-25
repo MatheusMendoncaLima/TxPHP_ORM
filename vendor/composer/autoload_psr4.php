@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'TxphpOrm\\TxphpOrm\\' => array($baseDir . '/src'),
+    'TxPHP\\orm\\' => array($baseDir . '/src'),
 );
