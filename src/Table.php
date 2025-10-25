@@ -28,6 +28,7 @@ abstract class Table
     public static function setConn($conn)
     {
         static::$internalTableConn = $conn;
+        
     }
 
     /**
@@ -36,7 +37,18 @@ abstract class Table
      */
     public static function addEntry(array $args)
     {
-        return static::arrayToObject(static::$internalTableConn->execute_query("INSERT INTO `" . static::$internalTableName . "` " . str_replace("\"", "`", ArrayToString::from(array_keys(static::$internalColumnsTable))) . " VALUES " . ArrayToString::from($args))->fetch_assoc());
+        $obj = [];
+        foreach($args as $key => $value){
+            if((in_array($key, array_keys(static::$internalColumnsTable))) == true){
+                $obj[$key] = $value;
+            }
+        }
+
+        $statement = "INSERT INTO `" . static::$internalTableName . "` " . str_replace("'", "`", ArrayToString::from(array_keys($obj))) . " VALUES " . ArrayToString::from(array_values($obj)). ";";
+        static::$internalTableConn->execute_query($statement);
+        $allResult = static::findAll(new Where($obj));
+        $lastResult = $allResult[sizeof($allResult)-1];
+        return $lastResult;
     }
 
     public static function removeWhere($idColumn, $id)
@@ -49,17 +61,11 @@ abstract class Table
      */
     public static function findAll(Where $where = new Where())
     {   
-        $allRowsRaw = static::$internalTableConn->execute_query("SELECT * from `" . static::$internalTableName . "` ".$where->getStatement().";\n")->fetch_all();
-        $allRowsFormatted = [];
+        $allRows = static::$internalTableConn->execute_query("SELECT * from `" . static::$internalTableName . "` ".$where->getStatement().";\n")->fetch_all(MYSQLI_ASSOC);
         $objects = [];
-        foreach($allRowsRaw as $rowIndex => $rowRaw) {
-            foreach($rowRaw as $index => $column){
-                $columnName = array_keys(static::getColumns())[$index];
-                $allRowsFormatted[$rowIndex][$columnName] = $column;
-            }
-        }
+       
 
-        foreach ($allRowsFormatted as $row) {
+        foreach ($allRows as $row) {
             array_push($objects, static::arrayToObject($row));
         }
 
@@ -264,6 +270,8 @@ abstract class Table
 
         return trim($assembled);
     }
+
+    
 }
 
 

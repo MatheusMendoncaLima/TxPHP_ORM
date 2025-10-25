@@ -14,7 +14,7 @@ use DateTime;
                 $arrayString.=",";
             }
             if(is_string($value)){
-                $value = "\"$value\"";
+                $value = "'$value'";
             }else if($value instanceof DateTime){
                 $value = $value->format("Y-m-d H:i:s");
             }
